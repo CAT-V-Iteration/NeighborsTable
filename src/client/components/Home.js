@@ -32,7 +32,7 @@ class Home extends React.Component {
         <div style={styles.callToAction}>
         <h1 style={styles.header}>Welcome to Neighbor's Table!</h1>
         <form onChange={this.handleChange} onSubmit={this.handleSubmit} style={styles.form}>
-          <input type="text" name='zip' placeHolder='enter your zip' style={styles.input}/>
+          <input type="text" name='zip' placeholder='enter your zip' style={styles.input}/>
           <button type="submit" style={styles.button}>Search</button>
         </form>
         </div>
