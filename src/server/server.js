@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter = require('./routes/api');
+const userRouter = require('./routes/user');
+const shopRouter = require('./routes/shop');
 
 const PORT = 3000; 
 
@@ -15,6 +17,8 @@ app.use(express.static('dist'));
 
 // access api router
 app.use('/api', apiRouter);
+app.use('/user', userRouter);
+app.use('/shop', shopRouter);
 
 // catches bad routes
 app.use('*', (req, res) => {

@@ -13,6 +13,7 @@ const productsReducer = (state = initialState, action) => {
         ...state, 
         productsList: fetchedList
       };
+      
     case(types.ADD_PRODUCT): 
       const updatedList = action.payload;
 
@@ -20,6 +21,7 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         productsList: updatedList
       };
+
     default:
       return {
         ...state
