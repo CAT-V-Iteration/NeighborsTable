@@ -1,4 +1,5 @@
 const db = require('../models/models.js');
+
 const productControllers = {};
 // read portion of CRUD 
 productControllers.getZip = (req,res,next) =>{
@@ -56,4 +57,5 @@ productControllers.sellerSave = (req, res, next) => {
       next({e: 'error on controller seller save'})
     })
   }
-      
+
+module.exports = productControllers;

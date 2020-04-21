@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import '../../../public/styles.css';
+
 
 class Home extends React.Component {
   state = {
