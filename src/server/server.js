@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter = require('./routes/api');
+const userRouter = require('./routes/user');
+const shopRouter = require('./routes/shop');
+
+const PORT = 3000; 
 
 const app = express();
 
@@ -13,6 +17,8 @@ app.use(express.static('dist'));
 
 // access api router
 app.use('/api', apiRouter);
+app.use('/user', userRouter);
+app.use('/shop', shopRouter);
 
 // catches bad routes
 app.use('*', (req, res) => {
@@ -25,6 +31,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Server Error');
 });
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+app.listen(PORT, () => {
+  console.log(`Listening on port ${3000}!`)
+});
 
 module.exports = app;

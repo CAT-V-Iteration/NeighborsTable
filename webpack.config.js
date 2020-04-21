@@ -19,8 +19,9 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -32,11 +33,14 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   devServer: {
-    port: 3000,
+    port: 8080,
     open: true,
     historyApiFallback: true,
+    contentBase: './public/index.html',
     proxy: {
-      '/api': 'http://localhost:8080'
+      '/api': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
+      '/shop': 'http://localhost:3000',
     }
   },
   plugins: [

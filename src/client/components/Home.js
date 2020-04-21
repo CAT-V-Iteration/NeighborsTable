@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import '../../../public/styles.css';
+
 
 class Home extends React.Component {
   state = {
     submitted: false
   }
   
-  //sets state of this component property to the name of the input field and grabs value of input field
+  // sets state of this component property to the name of the input field and grabs value of input field
   handleChange = (e) => {
     const {name, value} = e.target
     this.setState({[name]: value})
   }
   
-  //passing local state of this component to redux store through the getProducts action
+  // passing local state of this component to redux store through the getProducts action
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.getProducts(this.state.zip)
@@ -32,7 +32,7 @@ class Home extends React.Component {
         <div style={styles.callToAction}>
         <h1 style={styles.header}>Welcome to Neighbor's Table!</h1>
         <form onChange={this.handleChange} onSubmit={this.handleSubmit} style={styles.form}>
-          <input type="text" name='zip' placeHolder='enter your zip' style={styles.input}/>
+          <input type="text" name='zip' placeholder='enter your zip' style={styles.input}/>
           <button type="submit" style={styles.button}>Search</button>
         </form>
         </div>
