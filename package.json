@@ -2,7 +2,7 @@
   "name": "find-local",
   "version": "1.0.0",
   "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
-  "main": "src/server/index.js",
+  "main": "src/server/server.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/server.js",
