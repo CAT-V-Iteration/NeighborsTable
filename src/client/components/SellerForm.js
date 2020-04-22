@@ -1,26 +1,20 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
-class ProductForm extends React.Component {
-  constructor() {
-    super();
-    this.leave = false;
-  }
-  
+class SellerForm extends React.Component {
+
   handleChange = (e) => {
-    const {name, value} = e.target;
-    this.setState({[name]: value});
+    const {name, value} = e.target
+    this.setState({[name]: value})
   }
   
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.addProduct(this.state);
-    this.leave = true;
+    e.preventDefault()
+    this.props.addSeller(this.state);
   }
 
 
   render() {
-    // if (this.leave) return <Redirect to="/products" />
     return (
       <div>
         <nav style={styles.nav}>
@@ -33,38 +27,42 @@ class ProductForm extends React.Component {
         <div style={styles.formContainer} className="formContainer">
           <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
             <div style={styles.subFormDiv}>
-              <h3 style={styles.h3}>Product Info</h3>
+              <h3 style={styles.h3}>Seller Description</h3>
               <div style={styles.inputDiv}>
-                <label>Seller ID</label>
-                <input style={styles.input} name='seller_id'/>
+                <label>Name</label>
+                <input style={styles.input} name='name'/>
               </div>
               <div style={styles.inputDiv}>
-                <label>Product</label>
-                <input style={styles.input} name='title'/>
+                <label>Email</label>
+                <input style={styles.input} name='email'/>
               </div>
               <div style={styles.inputDiv}>
-                <label>Price</label>
-                <input style={styles.input} name='price'/>
+                <label>Phone</label>
+                <input style={styles.input} name='phone'/>
               </div>
               <div style={styles.inputDiv}>
-                <label>Description</label>
-                <input style={styles.input} name='description'/>
+                <label>About</label>
+                <input style={styles.input} name='about'/>
               </div>
-            </div>
+              <div style={styles.inputDiv}>
+                <label>Zip</label>
+                <input style={styles.input} name='zip'/>
+              </div>
+            </div> 
             <div style={styles.buttonDiv}>
-              <Link to='/products' style={styles.navLinkHome}>
-                <button style={styles.button} type='submit'>Back</button>
+              <Link to="/products">
+                <button style={styles.button}type='submit'>Back</button>
               </Link>
-              <button style={styles.button} type='submit'>Submit</button>
+                <button style={styles.button}type='submit'>Submit</button>
             </div>
-          </form>
+          </ form>
         </div>
       </div>
     )
   }
 }
 
-export default ProductForm;
+export default SellerForm;
 
 const styles = {
   formContainer: {

@@ -22,9 +22,10 @@ db.query(zipGetReq, zip)
 }
 // 
 productControllers.productSave = (req, res, next) => {
-  const { title, price, description } = req.body.product;
+
+  const { title, price, description, seller_id } = req.body.product;
   const sellerId = res.locals._id;
-  const values = [ title, price, description, sellerId ];
+  const values = [ title, price, description, seller_id ];
 
   // create portion of CRUD 
   // on insert you need to pass in the res.locals id from sellSave
@@ -34,21 +35,30 @@ productControllers.productSave = (req, res, next) => {
 
   db.query(saveProduct, values)
     .then(products => {
+      console.log('saveProduct data: ', products)
       next();
     })
     .catch(e => {
-      next({e: 'error on controller product save'});
+      next({
+        e: 'error on controller product save',
+        error: e 
+        });
     })
+
+
+
+
   }
 
 productControllers.sellerSave = (req, res, next) => {
 
-    const { name, zip, about, phone, email } = req.body.product;
+    const { name, zip, about, phone, email } = req.body.seller;
     const values = [ name, zip, about, phone, email ];
     const sellerSaveQuery = 
     `INSERT INTO seller(name, zip, about, phone, email)
     VALUES ($1, $2, $3, $4, $5) 
     RETURNING _id`;
+
 
   db.query(sellerSaveQuery, values)
     .then(sellers => {

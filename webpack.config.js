@@ -24,9 +24,18 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
-      }
+        test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg|ico)$/,
+        use: [
+          {
+            // loads files as base64 encoded data url if image file is less than set limit
+            loader: 'url-loader',
+            options: {
+              // if file is greater than the limit (bytes), file-loader is used as fallback
+              limit: 8192,
+            },
+          },
+        ],
+      },
     ]
   },
   resolve: {
@@ -36,7 +45,7 @@ module.exports = {
     port: 8080,
     open: true,
     historyApiFallback: true,
-    contentBase: './public/index.html',
+    contentBase: path.join(__dirname, 'public'),
     proxy: {
       '/api': 'http://localhost:3000',
       '/user': 'http://localhost:3000',
