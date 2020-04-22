@@ -28,14 +28,15 @@ router.get('/:zip/products', productControllers.getZip, (req, res) => {
 
 // product add
 router.post('/products/new',
-productControllers.productSave, // will save client info to the two tables tb, the product and the seller 
+productControllers.productSave,
+productControllers.getZip,
 (req, res) => {
-  res.status(200).json(res.locals.product);
+  res.status(200).json(res.locals.products);
 });
 
 // seller add
 router.post('/products/seller',
-productControllers.sellerSave, // will save client info to the two tables tb, the product and the seller 
+productControllers.sellerSave, 
 (req, res) => {
   res.status(200).json(res.locals.seller);
 });

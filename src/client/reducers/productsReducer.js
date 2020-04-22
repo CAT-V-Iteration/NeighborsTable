@@ -9,11 +9,9 @@ const initialState = {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case(types.GET_PRODUCTS):
-      const fetchedList = action.payload[0];
-      const zip = action.payload[1];
-      // console.log('productsReducer.js - MADE IT TO GET_PRODUCTS')
-      console.log('fetchedList', fetchedList)
-      console.log('zip', zip)
+    const fetchedList = action.payload[0];
+    const zip = action.payload[1];
+
       return{
         ...state, 
         productsList: fetchedList,
@@ -27,13 +25,15 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         productsList: updatedList
       };
+
     case(types.ADD_SELLER):
       const sellersList = action.payload;
-      console.log('payload?? ', action.payload)
+
       return {
         ...state,
         sellersList,
       }
+
     default:
       return {
         ...state

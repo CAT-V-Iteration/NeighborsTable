@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: (zip) => dispatch(actions.getProducts(zip)),
-  addProduct: (product) => dispatch(actions.addProduct(product)),
+  addProduct: (product, zip) => dispatch(actions.addProduct(product, zip)),
   addSeller: (seller) => dispatch(actions.addSeller(seller))
 })
 
@@ -29,7 +29,7 @@ class ProductsContainer extends React.Component {
         <Switch>
           <Route exact path="/" render={() => <Home getProducts={getProducts}/>}/>
           <Route exact path="/new/seller" render={() => <SellerForm addSeller={addSeller}/>} />
-          <Route exact path="/new/product" render={() => <ProductForm addProduct={addProduct}/>} />
+          <Route exact path="/new/product" render={() => <ProductForm zip={zip} addProduct={addProduct}/>} />
           <Route exact path="/products" render={()=> <ProductsList zip={zip} getProducts={getProducts} products={products}/>} />
         </Switch>
       </div>

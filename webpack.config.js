@@ -50,6 +50,7 @@ module.exports = {
       '/api': 'http://localhost:3000',
       '/user': 'http://localhost:3000',
       '/shop': 'http://localhost:3000',
+      '/public/**': 'http://localhost:3000',
     }
   },
   plugins: [

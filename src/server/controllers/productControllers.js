@@ -11,9 +11,9 @@ INNER JOIN seller s
 ON p.seller_id = s._id
 WHERE s.zip = $1`;
 
-const zip = [ req.params.zip ]; 
+const zip = (req.params.zip || req.body.zip); 
 
-db.query(zipGetReq, zip)
+db.query(zipGetReq, [ zip ])
   .then((products) => {
     res.locals.products = products.rows;
     next();
@@ -22,7 +22,6 @@ db.query(zipGetReq, zip)
 }
 // 
 productControllers.productSave = (req, res, next) => {
-
   const { title, price, description, seller_id } = req.body.product;
   const sellerId = res.locals._id;
   const values = [ title, price, description, seller_id ];
@@ -33,9 +32,10 @@ productControllers.productSave = (req, res, next) => {
   `INSERT INTO product(title,price,description,seller_id)
   VALUES ($1,$2,$3,$4)`;
 
+
   db.query(saveProduct, values)
     .then(products => {
-      console.log('saveProduct data: ', products)
+      res.locals.product = products.rows[0];
       next();
     })
     .catch(e => {
@@ -46,7 +46,7 @@ productControllers.productSave = (req, res, next) => {
     })
 
 
-
+// probably want to place another db query
 
   }
 
@@ -57,13 +57,14 @@ productControllers.sellerSave = (req, res, next) => {
     const sellerSaveQuery = 
     `INSERT INTO seller(name, zip, about, phone, email)
     VALUES ($1, $2, $3, $4, $5) 
-    RETURNING _id`;
+    RETURNING *`;
 
 
   db.query(sellerSaveQuery, values)
     .then(sellers => {
       res.locals._id = sellers.rows[0]._id;
       res.locals.about = sellers.rows[0].about;
+      res.locals.seller = sellers.rows[0];
       next();
     })
     .catch(e => {

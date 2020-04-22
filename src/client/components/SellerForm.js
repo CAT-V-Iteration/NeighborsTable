@@ -2,6 +2,17 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 class SellerForm extends React.Component {
+  constructor () {
+    super();
+    this.defaultState = {
+      name: '',
+      email: '',
+      phone: '',
+      about: '',
+      zip: '',
+    }
+    this.state = this.defaultState;
+  }
 
   handleChange = (e) => {
     const {name, value} = e.target
@@ -11,6 +22,7 @@ class SellerForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.addSeller(this.state);
+    this.setState(this.defaultState);
   }
 
 
@@ -27,27 +39,64 @@ class SellerForm extends React.Component {
         <div style={styles.formContainer} className="formContainer">
           <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
             <div style={styles.subFormDiv}>
+
               <h3 style={styles.h3}>Seller Description</h3>
+
+              {/* -------------- Seller Name -------------- */}
               <div style={styles.inputDiv}>
                 <label>Name</label>
-                <input style={styles.input} name='name'/>
+                <input 
+                value={this.state.name}
+                onChange={this.handleChange}
+                style={styles.input}
+                name='name'
+                />
               </div>
+
+              {/* -------------- Seller Email -------------- */}
               <div style={styles.inputDiv}>
                 <label>Email</label>
-                <input style={styles.input} name='email'/>
+                <input 
+                value={this.state.email}
+                onChange={this.handleChange}
+                style={styles.input}
+                name='email'
+                />
               </div>
+
+              {/* -------------- Seller Phone -------------- */}
               <div style={styles.inputDiv}>
                 <label>Phone</label>
-                <input style={styles.input} name='phone'/>
+                <input 
+                value={this.state.phone} 
+                onChange={this.handleChange} 
+                style={styles.input} 
+                name='phone'
+                />
               </div>
+
+              {/* -------------- Seller About -------------- */}
               <div style={styles.inputDiv}>
                 <label>About</label>
-                <input style={styles.input} name='about'/>
+                <input 
+                value={this.state.about}
+                onChange={this.handleChange}
+                style={styles.input}
+                name='about'
+                />
               </div>
+
+              {/* -------------- Seller Zip -------------- */}
               <div style={styles.inputDiv}>
                 <label>Zip</label>
-                <input style={styles.input} name='zip'/>
+                <input 
+                value={this.state.zip}
+                onChange={this.handleChange}
+                style={styles.input}
+                name='zip'
+                />
               </div>
+
             </div> 
             <div style={styles.buttonDiv}>
               <Link to="/products">

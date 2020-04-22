@@ -16,14 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('dist'));
 
-// app.get('/products', (req, res) => res.sendStatus(418))
-// app.get('/', (req, res) => res.sendStatus(418))
-// app.get('/public', (req, res) => res.sendStatus(418))
-
-// app.get('/public', 
-// app.use(express.static('assets')),
-// (req, res)=> res.status(200).sendFile(path.resolve(__dirname, '../../public/assets/NeighborsTableUC.png')))
-
+app.use('/public', express.static('public'));
 
 // access api router
 app.use('/api', apiRouter);

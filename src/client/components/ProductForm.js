@@ -5,7 +5,15 @@ class ProductForm extends React.Component {
   constructor() {
     super();
     this.leave = false;
+    this.defaultState = {
+      seller_id: '',
+      title: '',
+      price: '',
+      description: '',
+    }
+    this.state = this.defaultState;
   }
+  
   
   handleChange = (e) => {
     const {name, value} = e.target;
@@ -14,8 +22,9 @@ class ProductForm extends React.Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addProduct(this.state);
+    this.props.addProduct(this.state, this.props.zip);
     this.leave = true;
+    this.setState(this.defaultState);
   }
 
 
@@ -33,23 +42,53 @@ class ProductForm extends React.Component {
         <div style={styles.formContainer} className="formContainer">
           <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
             <div style={styles.subFormDiv}>
+
               <h3 style={styles.h3}>Product Info</h3>
+
+              {/* -------------- Seller ID -------------- */}
               <div style={styles.inputDiv}>
                 <label>Seller ID</label>
-                <input style={styles.input} name='seller_id'/>
+                <input 
+                value={this.state.seller_id} 
+                style={styles.input} 
+                onChange={this.handleChange}
+                name='seller_id'
+                />
               </div>
+
+              {/* -------------- Product -------------- */}
               <div style={styles.inputDiv}>
                 <label>Product</label>
-                <input style={styles.input} name='title'/>
+                <input 
+                value={this.state.title} 
+                style={styles.input} 
+                onChange={this.handleChange}
+                name='title'
+                />
               </div>
+
+              {/* -------------- Price -------------- */}
               <div style={styles.inputDiv}>
                 <label>Price</label>
-                <input style={styles.input} name='price'/>
+                <input 
+                value= {this.state.price} 
+                style={styles.input} 
+                onChange={this.handleChange}
+                name='price'
+                />
               </div>
+
+              {/* -------------- Description -------------- */}
               <div style={styles.inputDiv}>
                 <label>Description</label>
-                <input style={styles.input} name='description'/>
+                <input 
+                value= {this.state.description} 
+                style={styles.input} 
+                onChange={this.handleChange}
+                name='description'
+                />
               </div>
+
             </div>
             <div style={styles.buttonDiv}>
               <Link to='/products' style={styles.navLinkHome}>
