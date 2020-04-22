@@ -3,58 +3,72 @@ const db = require('../models/models.js');
 const productControllers = {};
 // read portion of CRUD 
 productControllers.getZip = (req,res,next) =>{
-console.log('hit the get request')
-const zipGetReq = `SELECT p.title,p.price,p.zip,p.description,s.name,s.about,s.phone,s.email
+
+const zipGetReq = 
+`SELECT p.title,p.price,p.description,s.name,s.about,s.phone,s.email
 FROM product p
 INNER JOIN seller s
-ON p.seller_id = s.seller_id
-WHERE p.zip = $1`
+ON p.seller_id = s._id
+WHERE s.zip = $1`;
 
-const zip = [req.params.zip]; 
+const zip = (req.params.zip || req.body.zip); 
 
-db.query(zipGetReq, zip)
+db.query(zipGetReq, [ zip ])
   .then((products) => {
-    res.locals.products = products.rows
-    next()
+    res.locals.products = products.rows;
+    next();
   })
-  .catch(e => console.log(e))
+  .catch(e => console.log(e));
 }
 // 
 productControllers.productSave = (req, res, next) => {
-  const { title, price, zip, description } = req.body.product
-  const sellerId = res.locals.seller_id
-  const values = [title, price, zip, description, sellerId]
-  console.log('this is our sellerId in productSave: ', sellerId)
+  const { title, price, description, seller_id } = req.body.product;
+  const sellerId = res.locals._id;
+  const values = [ title, price, description, seller_id ];
+
   // create portion of CRUD 
-  //on insert you need to pass in the res.locals id from sellSave
-  const saveProduct = ` INSERT INTO product(title,price,zip,description,seller_id)
-  VALUES ($1,$2,$3,$4,$5)`;
-  db.query(saveProduct,values)
+  // on insert you need to pass in the res.locals id from sellSave
+  const saveProduct = 
+  `INSERT INTO product(title,price,description,seller_id)
+  VALUES ($1,$2,$3,$4)`;
+
+
+  db.query(saveProduct, values)
     .then(products => {
-      next()
+      res.locals.product = products.rows[0];
+      next();
     })
     .catch(e => {
-      console.log(e)
-      next({e: 'error on controller product save'})
+      next({
+        e: 'error on controller product save',
+        error: e 
+        });
     })
+
+
+// probably want to place another db query
+
   }
 
 productControllers.sellerSave = (req, res, next) => {
-    console.log(req.body.product)
-    const { name, zip, about, phone, email } = req.body.product;
-    const values = [name, zip, about, phone, email];
-    const sellerSaveQuery = ` INSERT INTO seller(name,zip,about,phone,email)
-    VALUES ($1,$2,$3,$4,$5) 
-    RETURNING seller_id`;
+
+    const { name, zip, about, phone, email } = req.body.seller;
+    const values = [ name, zip, about, phone, email ];
+    const sellerSaveQuery = 
+    `INSERT INTO seller(name, zip, about, phone, email)
+    VALUES ($1, $2, $3, $4, $5) 
+    RETURNING *`;
+
+
   db.query(sellerSaveQuery, values)
     .then(sellers => {
-      res.locals.seller_id = sellers.rows[0].seller_id;
-      res.locals.about = sellers.rows[0].about
-      next()
+      res.locals._id = sellers.rows[0]._id;
+      res.locals.about = sellers.rows[0].about;
+      res.locals.seller = sellers.rows[0];
+      next();
     })
     .catch(e => {
-      console.log("this is our error: ", e),
-      next({e: 'error on controller seller save'})
+      next({e: 'error on controller seller save'});
     })
   }
 

@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Product from './Product';
+const path = require('path');
 
 const ProductsList = ({ products }) => {
+  if (!products) {
+    console.log('no zip')
+  } else console.log('zip')
 
   const renderProducts = () => {
     return products.map((product, i)=> {
@@ -14,10 +18,11 @@ const ProductsList = ({ products }) => {
         <nav style={styles.nav}>
           <div>
             <Link to='/' style={styles.navLinkHome}>
-              <img src="../../../public/assets/NeighborsTableUC.png" height="150"></img>
+              <img src={path.join(__dirname, "/public/assets/NeighborsTableUC.png")}height="150"></img>
             </Link>
           </div>
-          <Link to='/new' style={styles.navLinkProduct}>Create New Listing</Link>
+          <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
+          <Link to='/new/product' style={styles.navLinkProduct}>Create New Product</Link>
         </nav>
         <div style={styles.container}>{renderProducts()}</div>
       </>

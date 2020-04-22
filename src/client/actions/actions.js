@@ -5,19 +5,38 @@ export const getProducts = (zip) => {
   return (dispatch) => {
     axios.get(`/api/${zip}/products`)
     .then((res) => {
-      dispatch({type: types.GET_PRODUCTS, payload: res.data})
+      dispatch({type: types.GET_PRODUCTS, payload: [ res.data, zip ] })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log('getProducts action error: ', err))
   }
 }
 
-export const addProduct = (product) => {
-  console.log(product)
+
+export const addProduct = (product, zip ) => {
+
   return (dispatch) => {
-    axios.post('/api/products/new', {product})
+    axios.post('/api/products/new', { product, zip })
     .then((res) => {
-      dispatch({type: types.ADD_PRODUCT, payload: res.data})
+      dispatch(addProductList(res.data))
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log('addProduct action error: ', err))
+  }
+}
+
+
+export const addProductList = (data) =>({
+    type: types.ADD_PRODUCT,
+    payload: data
+})
+
+
+export const addSeller = (seller) => {
+
+  return (dispatch) => {
+    axios.post('/api/products/seller', {seller})
+    .then((res) => {
+      dispatch({type: types.ADD_SELLER, payload: res.data})
+    })
+    .catch(err => console.log('addSeller action error: ', err))
   }
 }

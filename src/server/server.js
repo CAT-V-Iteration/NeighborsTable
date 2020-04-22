@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const apiRouter = require('./routes/api');
 const userRouter = require('./routes/user');
 const shopRouter = require('./routes/shop');
+const path = require('path');
 
 const PORT = 3000; 
 
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('dist'));
+
+app.use('/public', express.static('public'));
 
 // access api router
 app.use('/api', apiRouter);
