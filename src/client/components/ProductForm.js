@@ -17,6 +17,7 @@ class ProductForm extends React.Component {
     this.setState({submitted: true})
   }
 
+
   render() {
     if(this.state.submitted === true) return <Redirect to='/'/>
     else return (
@@ -53,6 +54,9 @@ class ProductForm extends React.Component {
                 <input style={styles.input} name='zip'/>
               </div>
             </div> 
+            </ form>
+            
+            <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
             <div style={styles.subFormDiv}>
               <h3 style={styles.h3}>Product Info</h3>
               <div style={styles.inputDiv}>
