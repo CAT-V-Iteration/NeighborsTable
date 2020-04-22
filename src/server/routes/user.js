@@ -29,7 +29,7 @@ router.get('/login',
 router.post('/login',
   //middeware
   userControllers.signUp,
-  (req, res) => res.status(200).json(/* res.locals. */)
+  (req, res) => res.status(200).json(res.locals.username)
 );
 
 /* ------------------- USER/SELLER INFO ------------------- */

@@ -16,6 +16,12 @@ userControllers.getAll = (req, res, next) => {
       res.locals.users = users.rows;
       return next();
     })
+    .catch(err => {
+      next({
+        log: 'Error located in userControllers.getAll',
+        err,
+      })
+    });
 };
 
 
@@ -31,7 +37,25 @@ userControllers.verify = (req, res, next) => {
 // POST /login -----------------------------------------------
 // Create new user data
 userControllers.signUp = (req, res, next) => {
-
+  const signUpQuery = `
+    INSERT INTO users (username, password)
+    VALUES ($1, $2);
+  `;
+  const { username, password } = req.body;
+  const values = [ username, password ];
+  if (!username || !password) return next("Username and/ or Password are null")
+  
+  db.query(signUpQuery, values)
+    .then(signUp => {
+      res.locals.username = username;
+      return next();
+    })
+    .catch(err => {
+      next({
+        log: 'Error located in userControllers.signUp',
+        err,
+      })
+    })
 };
 
 
