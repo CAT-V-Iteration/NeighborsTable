@@ -8,7 +8,14 @@ const userControllers = {};
 // GET /test ---------------------------------------------------
 // Get all user data
 userControllers.getAll = (req, res, next) => {
-
+  const getAllQuery = `
+    SELECT * FROM users;
+  `;
+  db.query(getAllQuery)
+    .then(users => {
+      res.locals.users = users.rows;
+      return next();
+    })
 };
 
 
