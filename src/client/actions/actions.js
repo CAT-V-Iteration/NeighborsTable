@@ -40,18 +40,3 @@ export const addSeller = (seller) => {
     .catch(err => console.log('addSeller action error: ', err))
   }
 }
-
-
-// export const getShoppingList = (userId) => {
-
-//   return (dispatch) => {
-//     axios.get('/shop', { userId })
-//     .then((res) => {
-//       console.log('getShoppingList response: ', res)
-//       dispatch({type: types.ADD_SELLER, payload: res.data})
-//     })
-//     .catch(err => console.log('getShoppingList action error: ', err))
-//   }
-// }
-
-

@@ -7,7 +7,6 @@ import Home from '../components/Home';
 import ProductsList from '../components/ProductsList';
 import ProductForm from '../components/ProductForm';
 import SellerForm from '../components/SellerForm';
-import ShoppingList from '../components/ShoppingList';
 
 const mapStateToProps = state => ({
   products: state.products.productsList,
@@ -32,7 +31,6 @@ class ProductsContainer extends React.Component {
           <Route exact path="/new/seller" render={() => <SellerForm addSeller={addSeller}/>} />
           <Route exact path="/new/product" render={() => <ProductForm zip={zip} addProduct={addProduct}/>} />
           <Route exact path="/products" render={()=> <ProductsList zip={zip} getProducts={getProducts} products={products}/>} />
-          <Route exact path="/list" render={()=> <ShoppingList />} />
         </Switch>
       </div>
     )
