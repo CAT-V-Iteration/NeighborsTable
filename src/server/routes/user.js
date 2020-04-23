@@ -28,6 +28,7 @@ router.get('/login',
 // Create new user data
 router.post('/login',
   //middeware
+  userControllers.checkUsername,
   userControllers.signUp,
   (req, res) => res.status(200).json(res.locals.username)
 );
@@ -36,7 +37,7 @@ router.post('/login',
 
 // PUT /user
 // Register user as seller
-router.put('/user',
+router.put('/user', // needs to be adjusted
   //middeware
   userControllers.registerSeller,
   (req, res) => res.status(200).json(/* res.locals. */)
@@ -44,7 +45,7 @@ router.put('/user',
 
 // GET /user
 // Get seller_id from user data and attach to new product
-router.get('/user',
+router.get('/user', // needs to be adjusted
   //middeware
   userControllers.sellerID,
   (req, res) => res.status(200).json(/* res.locals. */)

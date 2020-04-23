@@ -35,6 +35,31 @@ userControllers.verify = (req, res, next) => {
 
 
 // POST /login -----------------------------------------------
+// Check if username is uique
+userControllers.checkUsername = (req, res, next) => {
+  const checkUsernameQuery = `
+    SELECT username FROM users
+    WHERE username = $1
+  `;
+  const { username } = req.body;
+
+  db.query(checkUsernameQuery, [username])
+    .then(usernames => {
+      if (usernames.rows.length) {
+        res.status(200).json({err: 'Username is already taken.'})
+      }
+      else return next();
+    })
+    .catch(err => {
+      next({
+        log: 'Error located in userControllers.checkUsername',
+        err,
+      })
+    })
+}
+
+
+// POST /login -----------------------------------------------
 // Create new user data
 userControllers.signUp = (req, res, next) => {
   const signUpQuery = `
