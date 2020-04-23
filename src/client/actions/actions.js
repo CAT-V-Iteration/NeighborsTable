@@ -45,8 +45,6 @@ export const getShoppingList = (userId) => {
   return (dispatch) => {
     axios.get('/shop', { userId })
     .then((res) => {
-      // ideally res would be updated completed shoppingList 
-      console.log('getShoppingList response: ', res)
       dispatch({type: types.ADD_SELLER, payload: res.data})
     })
     .catch(err => console.log('getShoppingList action error: ', err))
@@ -57,7 +55,6 @@ export const addItem = (user_id, index) => {
   return (dispatch) => {
     axios.get('/additem', { user_id, index })
     .then((res) => {
-      console.log('addItem response: ', res)
       dispatch({type: types.ADD_ITEM, payload: res.data})
     })
     .catch(err => console.log('addItem action error: ', err))
@@ -71,10 +68,27 @@ export const addItem = (user_id, index) => {
 
 
 export const addUser = (username, password) => {
-
+  return (dispatch) => {
+    axios.post('/user/login', { username, password })
+    .then(res => {
+      dispatch({ type: types.ADD_USER, payload: res.data })
+    })
+    .catch(err => console.log('addUser action error: ', err))
+  }
 }
 
 
 export const login = (username, password) => {
-
+  return (dispatch) => {
+    axios.get('/user/login', { params: {username: username , password: password } })
+    .then(res => {
+      dispatch({ type: types.LOGIN, payload: res.data })
+    })
+    .catch(err => console.log('login action error: ', err))
+  }
 }
+
+
+export const logout = () => ({
+  type: types.LOGOUT,
+});

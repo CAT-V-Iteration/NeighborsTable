@@ -2,8 +2,8 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 class LoginPage extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.defaultState = {
       toggle: 'login',
       username: '',
@@ -18,12 +18,15 @@ class LoginPage extends React.Component {
   }
   
   handleSubmit = (e) => {
-    e.preventDefault()
-    if (this.state.toggle === 'login') {
+    e.preventDefault();
 
+    const { username, password } = this.state;
+    
+    if (this.state.toggle === 'login') {
+      this.props.login(username, password);
     }
     else {
-      
+      this.props.addUser(username, password);
     }
     this.setState(this.defaultState);
   }
@@ -85,6 +88,7 @@ class LoginPage extends React.Component {
               <div>
                 <a 
                   onClick={this.handleToggle}
+                  style={styles.atag}
                 >
                   {
                     this.state.toggle === 'login'
@@ -96,9 +100,14 @@ class LoginPage extends React.Component {
             </div> 
             <div style={styles.buttonDiv}>
               <Link to="/products">
-                <button style={styles.button}type='submit'>Back</button>
+                <button style={styles.back_button}type='submit'>Back</button>
               </Link>
-                <button style={styles.button}type='submit'>Login</button>
+                <button style={styles.button}type='submit'>
+                {
+                  this.state.toggle === 'login' ?
+                  'Login' : 'Sign Up'
+                }
+                </button>
             </div>
           </ form>
         </div>
@@ -184,5 +193,32 @@ const styles = {
   h3: {
     textAlign: 'center',
 
-  }
+  },
+  atag: {
+    display: 'flex',
+    justifyContent: 'center',
+    minWidth: '150px',
+    fontSize: '0.75rem',
+    fontWeight: '500',
+    borderRadius: '5px',
+    padding: '8px 8px',
+    cursor: 'pointer',
+    margin: '2.5rem',
+    border:'2px solid #3F9E4D',
+    background: '#F9F9F9',
+    color: 'black',
+    opacity: '.9'
+  },
+  back_button: {
+    minWidth: '150px',
+    fontSize: '1.2rem',
+    fontWeight: '500',
+    borderRadius: '5px',
+    padding: '8px 16px',
+    cursor: 'pointer',
+    margin: '2.5rem',
+    background:'#EAEAEA',
+    color: 'black',
+    opacity: '.9'
+  },
 }
