@@ -20,7 +20,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: (zip) => dispatch(actions.getProducts(zip)),
   addProduct: (product, zip) => dispatch(actions.addProduct(product, zip)),
-  addSeller: (seller) => dispatch(actions.addSeller(seller))
+  addSeller: (seller) => dispatch(actions.addSeller(seller)),
+  addItem: (user_id, index) => dispatch(actions.addItem(user_id, index))
+
 })
 
 class ProductsContainer extends React.Component {

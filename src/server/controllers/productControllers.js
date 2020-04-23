@@ -5,7 +5,7 @@ const productControllers = {};
 productControllers.getZip = (req,res,next) =>{
 
 const zipGetReq = 
-`SELECT p.title,p.price,p.description,s.name,s.about,s.phone,s.email
+`SELECT p._id product_id, p.title, p.price, p.description, s.name, s.about, s.phone, s.email
 FROM product p
 INNER JOIN seller s
 ON p.seller_id = s._id

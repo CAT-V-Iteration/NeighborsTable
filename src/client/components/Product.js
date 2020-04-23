@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 import SellerModal from './SellerModal';
 
-const Product = ({ name, price, about, title, descripton, email, phone }) => {
+const Product = ({ product_id, index, name, price, about, title, descripton, email, phone }) => {
     const [toggle, setToggle] = useState(false)
 
     const handleModal = () => {
       setToggle(!toggle)
     }
 
-    if(toggle) return (
+    //NEED TO BRING IN ADDITEM
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      addItem(user_id, product_id);
+    }
+  
+
+    if (toggle) return (
       <div style={styles.card} onClick={handleModal}>
         <div style={styles.modal}>
           <SellerModal closeModal={handleModal} about={about} phone={phone} email={email} name={name}/>
@@ -36,6 +43,7 @@ const Product = ({ name, price, about, title, descripton, email, phone }) => {
             <h1 style={styles.headerFont}>{price}</h1>
             <p style={styles.headerFont}>{name}</p>
             <p style={styles.description}>{about}</p>
+            <button onSubmit={handleSubmit} style={styles.button} type='submit'>Add to List</button>
           </div>
         </div>
     )
@@ -88,5 +96,17 @@ const styles = {
       overflow: 'auto', 
       backgroundColor: '#CDCDCD',
       opacity: '.95'
+    },
+    button: {
+      minWidth: '150px',
+      fontSize: '1.2rem',
+      fontWeight: '500',
+      borderRadius: '5px',
+      padding: '8px 16px',
+      cursor: 'pointer',
+      margin: '2.5rem',
+      background:'#3F9E4D',
+      color: 'aliceblue',
+      opacity: '.9'
     },
 };

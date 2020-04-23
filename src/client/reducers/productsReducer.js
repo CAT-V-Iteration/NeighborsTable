@@ -28,7 +28,8 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         productsList: updatedList
       };
-
+      
+    // ADD SELLER
     case(types.ADD_SELLER):
       const sellersList = action.payload;
       // Update seller_id
@@ -37,6 +38,22 @@ const productsReducer = (state = initialState, action) => {
         sellersList,
       }
 
+    case(types.ADD_USER):
+
+    return {
+      ...state,
+    }
+
+    case(types.LOGIN):
+
+    return {
+      ...state,
+    }
+    //case add item
+    //case delete item
+    //case add seller
+    
+    // DEFAULT 
     default:
       return {
         ...state
