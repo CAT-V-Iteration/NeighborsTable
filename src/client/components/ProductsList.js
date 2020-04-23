@@ -22,8 +22,7 @@ const ProductsList = ({ products }) => {
             </Link>
           </div>
           <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
-          <Link to='/new/product' style={styles.navLinkProduct}>Add New Product</Link>
-          <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
+          <Link to='/new/product' style={styles.navLinkProduct}>Create New Product</Link>
         </nav>
         <div style={styles.container}>{renderProducts()}</div>
       </>
@@ -68,13 +67,5 @@ const styles = {
     fontWeight: '900',
     textDecoration: 'none',
     marginLeft: '4rem',
-  },
-  navLinkCart: {
-    fontFamily: 'Varela Round',
-    fontSize: '1.2rem',
-    color: 'aliceblue',
-    fontWeight: '900',
-    textDecoration: 'none',
-    marginLeft: '15rem',
   }
 }
