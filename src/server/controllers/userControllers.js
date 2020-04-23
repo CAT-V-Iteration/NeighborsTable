@@ -35,7 +35,7 @@ userControllers.verify = (req, res, next) => {
     FROM users
     WHERE username = $1 AND password = $2
   `;
-  const { username, password } = req.body;
+  const { username, password } = req.query;
   db.query(verifyQuery, [username, password])
     .then(loginData => {
       if (loginData.rows.length) {
@@ -111,6 +111,7 @@ userControllers.signUp = (req, res, next) => {
     VALUES ($1, $2)
     RETURNING _id;
   `;
+
   const { username, password } = req.body;
   const values = [ username, password ];
   if (!username || !password) return next("Username and/ or Password are null")

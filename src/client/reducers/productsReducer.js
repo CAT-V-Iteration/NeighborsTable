@@ -39,16 +39,19 @@ const productsReducer = (state = initialState, action) => {
       }
 
     case(types.ADD_USER):
-
-    return {
-      ...state,
-    }
+      return {
+        ...state,
+        user_id: action.payload.user_id,
+        seller_id: action.payload.seller_id,
+      }
 
     case(types.LOGIN):
-
-    return {
-      ...state,
-    }
+    
+      return {
+        ...state,
+        user_id: action.payload.user_id,
+        seller_id: action.payload.seller_id,
+      }
     //case add item
     //case delete item
     //case add seller
