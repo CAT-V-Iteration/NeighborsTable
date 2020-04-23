@@ -3,6 +3,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   productsList: [],
   sellersList: [],
+  shoppingList = [],
   zip: null,
 };
 
