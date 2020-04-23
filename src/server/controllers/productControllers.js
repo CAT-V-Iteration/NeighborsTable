@@ -49,11 +49,11 @@ productControllers.productSave = (req, res, next) => {
 
 productControllers.sellerSave = (req, res, next) => {
 
-    const { name, zip, about, phone, email } = req.body.seller;
-    const values = [ name, zip, about, phone, email ];
+    const { name, zip, about, phone, email, users_id } = req.body.seller;
+    const values = [ name, zip, about, phone, email, users_id ];
     const sellerSaveQuery = 
-    `INSERT INTO seller(name, zip, about, phone, email)
-    VALUES ($1, $2, $3, $4, $5) 
+    `INSERT INTO seller(name, zip, about, phone, email, users_id)
+    VALUES ($1, $2, $3, $4, $5, $6) 
     RETURNING *`;
 
 
