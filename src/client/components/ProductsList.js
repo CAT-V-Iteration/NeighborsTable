@@ -10,6 +10,10 @@ const ProductsList = ({ products, user_id, seller_id }) => {
       return <Product key={`product: ${i}`}{...product}/>
     })
   }
+
+  const handleLogout = () => {
+    // Invoke logout action
+  }
     return(
       <> 
         <nav style={styles.nav}>
@@ -21,11 +25,15 @@ const ProductsList = ({ products, user_id, seller_id }) => {
           {/* ---------------- No: User, No: Seller ---------------- */}
           { user_id === null ?
           <Link to='/login' style={styles.navLinkProduct}>Login / Signup</Link>
-          : <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
+          : <button onClick={handleLogout} style={styles.navLinkCart}>Logout</button>
           }
           {/* ---------------- Yes: User, No: Seller ---------------- */}
           { seller_id === null && user_id !== null ?
           <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
+          : <div />
+          }
+          { user_id !== null ?
+          <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
           : <div />
           }
           {/* ---------------- Yes: User, Yes: Seller ---------------- */}

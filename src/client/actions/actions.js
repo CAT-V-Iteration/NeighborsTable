@@ -87,3 +87,8 @@ export const login = (username, password) => {
     .catch(err => console.log('login action error: ', err))
   }
 }
+
+
+export const logout = () => ({
+  type: types.LOGOUT,
+});
