@@ -44,10 +44,7 @@ productControllers.productSave = (req, res, next) => {
         error: e 
         });
     })
-
-
-// probably want to place another db query
-
+    // probably want to place another db query
   }
 
 productControllers.sellerSave = (req, res, next) => {

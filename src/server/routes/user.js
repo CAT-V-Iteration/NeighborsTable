@@ -20,7 +20,8 @@ router.get('/test',
 router.get('/login',
   //middeware
   userControllers.verify,
-  (req, res) => res.status(200).json(/* res.locals. */)
+  userControllers.verifySeller,
+  (req, res) => res.status(200).json(res.locals)
 );
 
 
@@ -30,7 +31,8 @@ router.post('/login',
   //middeware
   userControllers.checkUsername,
   userControllers.signUp,
-  (req, res) => res.status(200).json(res.locals.username)
+  userControllers.verifySeller,
+  (req, res) => res.status(200).json(res.locals)
 );
 
 /* ------------------- USER/SELLER INFO ------------------- */
