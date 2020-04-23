@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import Product from './Product';
 const path = require('path');
 
-const ProductsList = ({ products }) => {
-  if (!products) {
-    console.log('no zip')
-  } else console.log('zip')
-
+const ProductsList = ({ products, user_id, seller_id }) => {
+  
   const renderProducts = () => {
     return products.map((product, i)=> {
       return <Product key={`product: ${i}`}{...product}/>
@@ -21,12 +18,26 @@ const ProductsList = ({ products }) => {
               <img src={path.join(__dirname, "/public/assets/NeighborsTableUC.png")}height="150"></img>
             </Link>
           </div>
+          {/* ---------------- No: User, No: Seller ---------------- */}
+          { user_id === null ?
+          <Link to='/login' style={styles.navLinkProduct}>Login / Signup</Link>
+          : <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
+          }
+          {/* ---------------- Yes: User, No: Seller ---------------- */}
+          { seller_id === null && user_id !== null ?
           <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
+          : <div />
+          }
+          {/* ---------------- Yes: User, Yes: Seller ---------------- */}
+          { seller_id !== null && user_id !== null ?
           <Link to='/new/product' style={styles.navLinkProduct}>Add New Product</Link>
-          <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
+          : <div />
+          }
+
         </nav>
+        
         <div style={styles.container}>{renderProducts()}</div>
-      </>
+    </>
     )
 }
 

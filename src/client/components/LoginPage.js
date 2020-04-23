@@ -30,7 +30,7 @@ class LoginPage extends React.Component {
 
   handleToggle = () => {
     const toggle = this.state.toggle === 'login' ? 'signup' : 'login';
-    setState({
+    this.setState({
       ...this.state,
       toggle,
     })
