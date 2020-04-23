@@ -28,7 +28,7 @@ class SellerForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div>=
         <nav style={styles.nav}>
           <div>
             <Link to='/' style={styles.navLinkHome}>
