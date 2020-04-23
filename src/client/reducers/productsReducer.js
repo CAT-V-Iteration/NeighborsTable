@@ -1,6 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
+  user_id: null,
+  seller_id: null,
   productsList: [],
   sellersList: [],
   shoppingList: [],
@@ -29,7 +31,7 @@ const productsReducer = (state = initialState, action) => {
 
     case(types.ADD_SELLER):
       const sellersList = action.payload;
-
+      // Update seller_id
       return {
         ...state,
         sellersList,
