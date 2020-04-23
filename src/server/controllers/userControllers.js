@@ -130,22 +130,6 @@ userControllers.signUp = (req, res, next) => {
 };
 
 
-/* ------------------- USER/SELLER INFO ------------------- */
-
-// PUT /user
-// Register user as seller
-userControllers.registerSeller = (req, res, next) => {
-  
-};
-
-
-// GET /user
-// Get seller_id from user data and attach to new product
-userControllers.sellerID = (req, res, next) => {
-  
-};
-
-
 /* ----------------------- STRETCH ----------------------- */
 // PUT /login ------------------------------------------------
 // Change password

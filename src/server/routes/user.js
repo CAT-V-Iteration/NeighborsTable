@@ -35,24 +35,6 @@ router.post('/login',
   (req, res) => res.status(200).json(res.locals)
 );
 
-/* ------------------- USER/SELLER INFO ------------------- */
-
-// PUT /user
-// Register user as seller
-router.put('/user', // needs to be adjusted
-  //middeware
-  userControllers.registerSeller,
-  (req, res) => res.status(200).json(/* res.locals. */)
-);
-
-// GET /user
-// Get seller_id from user data and attach to new product
-router.get('/user', // needs to be adjusted
-  //middeware
-  userControllers.sellerID,
-  (req, res) => res.status(200).json(/* res.locals. */)
-);
-
 
 /* ----------------------- STRETCH ----------------------- */
 // PUT /login ------------------------------------------------
