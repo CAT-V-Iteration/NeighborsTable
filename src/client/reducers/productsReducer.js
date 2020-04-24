@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes';
+import Cookies from 'js-cookie';
 
 const initialState = {
   user_id: null,
@@ -15,11 +16,13 @@ const productsReducer = (state = initialState, action) => {
     const fetchedList = action.payload[0];
     const zip = action.payload[1];
 
-      return{
-        ...state, 
-        productsList: fetchedList,
-        zip,
-      };
+    return{
+      ...state, 
+      productsList: fetchedList,
+      zip,
+      user_id: Cookies.get('user_id'),
+      seller_id: Cookies.get('seller_id'),
+    };
       
     case(types.ADD_PRODUCT): 
       const updatedList = action.payload;
@@ -54,7 +57,8 @@ const productsReducer = (state = initialState, action) => {
       }
     
     case(types.LOGOUT):
-
+      Cookies.remove('user_id');
+      Cookies.remove('seller_id');
       return {
         ...state,
         user_id: null,
