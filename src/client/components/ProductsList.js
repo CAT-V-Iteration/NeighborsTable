@@ -32,7 +32,7 @@ const ProductsList = ({ products, user_id, seller_id, logout, zip, getProducts }
           : <Link onClick={handleLogout} style={styles.navLinkCart}>Logout</Link>
           }
           {/* ---------------- Yes: User, No: Seller ---------------- */}
-          { !seller_id && user_id ?
+          { user_id ?
           <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
           : <div />
           }
@@ -41,7 +41,7 @@ const ProductsList = ({ products, user_id, seller_id, logout, zip, getProducts }
           : <div />
           }
           {/* ---------------- Yes: User, Yes: Seller ---------------- */}
-          { seller_id && user_id ?
+          { (seller_id && seller_id !== 'j:null') && user_id ?
           <Link to='/new/product' style={styles.navLinkProduct}>Add New Product</Link>
           : <div />
           }
