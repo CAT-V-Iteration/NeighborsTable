@@ -24,12 +24,13 @@ const mapDispatchToProps = dispatch => ({
   addItem: (user_id, index) => dispatch(actions.addItem(user_id, index)),
   login: (username, password) => dispatch(actions.login(username, password)),
   addUser: (username, password) => dispatch(actions.addUser(username, password)),
+  logout: () => dispatch(actions.logout()),
 })
 
 class ProductsContainer extends React.Component {
 
   render() {
-    const { user_id, seller_id, getProducts, addProduct, products, addSeller, zip, login, addUser } = this.props;
+    const { user_id, seller_id, getProducts, addProduct, products, addSeller, zip, login, addUser, logout } = this.props;
 
     return (
       <div>
@@ -37,7 +38,7 @@ class ProductsContainer extends React.Component {
           <Route exact path="/" render={() => <Home getProducts={getProducts}/>}/>
           <Route exact path="/new/seller" render={() => <SellerForm addSeller={addSeller}/>} />
           <Route exact path="/new/product" render={() => <ProductForm zip={zip} addProduct={addProduct}/>} />
-          <Route exact path="/products" render={()=> <ProductsList user_id={user_id} seller_id={seller_id} zip={zip} getProducts={getProducts} products={products}/>} />
+          <Route exact path="/products" render={()=> <ProductsList user_id={user_id} seller_id={seller_id} zip={zip} logout={logout} getProducts={getProducts} products={products}/>} />
           <Route exact path="/list" render={()=> <ShoppingList />} />
           <Route exact path="/login" render={()=> <LoginPage login={login} addUser={addUser} />} />
         </Switch>

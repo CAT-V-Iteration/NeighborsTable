@@ -67,6 +67,8 @@ userControllers.verifySeller = (req, res, next) => {
     .then(sellerID => {
       res.locals.seller_id = sellerID.rows.length ? 
       sellerID.rows[0]._id : null;
+      res.cookie('user_id', res.locals.user_id);
+      res.cookie('seller_id', res.locals.seller_id);
       next();
     })
     .catch(err => {
