@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Product from './Product';
 const path = require('path');
+import Cookies from 'js-cookie';
 
-const ProductsList = ({ products, user_id, seller_id }) => {
+const ProductsList = ({ products, user_id, seller_id, logout, zip, getProducts }) => {
+  zip = Cookies.get('zip');
+  getProducts(zip);
   
   const renderProducts = () => {
     return products.map((product, i)=> {
@@ -13,6 +16,7 @@ const ProductsList = ({ products, user_id, seller_id }) => {
 
   const handleLogout = () => {
     // Invoke logout action
+    logout();
   }
     return(
       <> 
@@ -23,21 +27,21 @@ const ProductsList = ({ products, user_id, seller_id }) => {
             </Link>
           </div>
           {/* ---------------- No: User, No: Seller ---------------- */}
-          { user_id === null ?
+          { !user_id ?
           <Link to='/login' style={styles.navLinkProduct}>Login / Signup</Link>
-          : <button onClick={handleLogout} style={styles.navLinkCart}>Logout</button>
+          : <Link onClick={handleLogout} style={styles.navLinkCart}>Logout</Link>
           }
           {/* ---------------- Yes: User, No: Seller ---------------- */}
-          { seller_id === null && user_id !== null ?
+          { user_id ?
           <Link to='/new/seller' style={styles.navLinkProduct}>Register as Seller</Link>
           : <div />
           }
-          { user_id !== null ?
+          { user_id ?
           <Link to='/list' style={styles.navLinkCart}>Shopping List</Link>
           : <div />
           }
           {/* ---------------- Yes: User, Yes: Seller ---------------- */}
-          { seller_id !== null && user_id !== null ?
+          { (seller_id && seller_id !== 'j:null') && user_id ?
           <Link to='/new/product' style={styles.navLinkProduct}>Add New Product</Link>
           : <div />
           }

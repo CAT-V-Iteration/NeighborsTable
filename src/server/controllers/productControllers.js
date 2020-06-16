@@ -16,6 +16,7 @@ const zip = (req.params.zip || req.body.zip);
 db.query(zipGetReq, [ zip ])
   .then((products) => {
     res.locals.products = products.rows;
+    res.cookie('zip', zip)
     next();
   })
   .catch(e => console.log(e));
