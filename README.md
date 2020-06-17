@@ -1,4 +1,5 @@
 # Neighbor's Table
+<img src='/public/assets/demo.gif'>
 
 ## Overview
 Neighbor's Table is an open source and free to use tool for local farmers market vendors to meet local buyers looking for their produce. The idea stemmed from the difficulty faced by vendors as farmers markets shut down nationwide. Neighbor's Table supports local businesses and consumers.
